@@ -3,6 +3,7 @@
 # contains all characters of the alphabet.
 # O(n+m) runtime
 # Ex: "d", "ro", "ri", "or" -> "droi"
+# Assumption: input is valid
 
 from typing import List, Dict
 from queue import Queue

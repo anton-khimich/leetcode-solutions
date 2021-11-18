@@ -32,12 +32,12 @@ def top_sort_kahns(graph: Dict[str, str]) -> str:
     return ordering
 
 def top_sort_dfs(graph: Dict[str, str]) -> str:
-    visited: List[str] = []
+    visited: Dict[str, str] = {}
 
     def dfs (root: str, graph: Dict[str, str]) -> str:
         ordering = ''
         if root not in visited:
-            visited.append(root)
+            visited[root] = True
             for nodes in graph[root]:
                 for node in nodes:
                     ordering += dfs(node, graph)
@@ -65,8 +65,8 @@ def solution(words: List[str]) -> str:
                 alpha_map[prev[j]].append(curr[j])
                 break
 
-    # return top_sort_dfs(alpha_map)
-    return top_sort_kahns(alpha_map)
+    return top_sort_dfs(alpha_map)
+    # return top_sort_kahns(alpha_map)
 
 
 print(solution(['wrt','wrf','er','ett','rftt'])) # wertf

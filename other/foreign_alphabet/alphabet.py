@@ -9,7 +9,7 @@ from typing import List, Dict
 from queue import Queue
 
 
-def top_sort_kahns(graph: Dict[str, str]) -> str:
+def top_sort_kahns(graph: Dict[str, List[str]]) -> str:
     ordering = ''
     queue = Queue()
     in_degree = {k:0 for k in graph}
@@ -33,9 +33,9 @@ def top_sort_kahns(graph: Dict[str, str]) -> str:
     return ordering
 
 def top_sort_dfs(graph: Dict[str, str]) -> str:
-    visited: Dict[str, str] = {}
+    visited: Dict[str, bool] = {}
 
-    def dfs (root: str, graph: Dict[str, str]) -> str:
+    def dfs (root: str, graph: Dict[str, List[str]]) -> str:
         ordering = ''
         if root not in visited:
             visited[root] = True
@@ -53,7 +53,7 @@ def top_sort_dfs(graph: Dict[str, str]) -> str:
 
 
 def solution(words: List[str]) -> str:
-    alpha_map = {}
+    alpha_map: Dict[str, List[str]] = {}
     for word in words:
         for c in word:
             alpha_map[c] = []
@@ -66,8 +66,8 @@ def solution(words: List[str]) -> str:
                 alpha_map[prev[j]].append(curr[j])
                 break
 
-    return top_sort_dfs(alpha_map)
-    # return top_sort_kahns(alpha_map)
+    # return top_sort_dfs(alpha_map)
+    return top_sort_kahns(alpha_map)
 
 
 print(solution(['wrt','wrf','er','ett','rftt'])) # wertf
